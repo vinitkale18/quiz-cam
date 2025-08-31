@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campusify+ Knowledge Challenge</title>
+    <title>Campusify+ Quiz</title>
     <style>
         :root {
             --primary-blue: #4f2eab;
@@ -153,8 +153,9 @@
         }
         
         .content {
-            padding: 50px 40px;
+            padding: 30px 15px;
         }
+        
         
         .page {
             display: none;
@@ -185,7 +186,7 @@
             box-shadow: 0 8px 25px rgba(241, 143, 1, 0.3);
             position: relative;
             overflow: hidden;
-            margin-top: -15px;
+            margin-top: -px;
         }
         
         .badge::before {
@@ -533,7 +534,7 @@
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            margin: 30px auto;
+            margin: 10px auto;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -542,6 +543,7 @@
             font-weight: 800;
             color: white;
             position: relative;
+
             animation: scoreReveal 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
@@ -648,6 +650,7 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             box-shadow: 0 8px 25px rgba(46, 134, 171, 0.3);
+            justify-content: center;
         }
         
         .stats-container {
@@ -782,9 +785,31 @@
             }
             
             .content {
-                padding: 25px 20px;
+                padding: 25px 15px;
+            }
+
+            .question-card {
+                padding: 25px 15px;
             }
             
+            .quiz-navigation {
+        gap: 10px;
+    }
+
+    .btn-secondary {
+        flex: 1;   /* smaller share */
+        font-size: 14px;
+        padding: 10px 12px;
+        justify-content: center;
+    }
+
+    .btn-next {
+        flex: 2;   /* bigger share */
+        font-size: 20px;
+        padding: 12px 14px;
+        justify-content: center;
+    }
+
             .logo {
                 font-size: 28px;
             }
@@ -854,9 +879,6 @@
             </div>
             <div class="content">
                 <div class="welcome-content">
-                    <div class="badge">
-                        🎯 Knowledge Challenge
-                    </div>
                     
                     <h1 class="welcome-title">Test Your Technical Skills</h1>
                     <p class="welcome-description">
@@ -955,7 +977,7 @@
                         <!-- Result content will be populated by JavaScript -->
                     </div>
                     
-                    <div class="stats-container">
+                    <!-- <div class="stats-container">
                         <div class="stat-card">
                             <div class="stat-number" id="accuracyPercent">0%</div>
                             <div class="stat-label">Accuracy</div>
@@ -968,16 +990,17 @@
                             <div class="stat-number" id="questionsAnswered">0</div>
                             <div class="stat-label">Answered</div>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="purchaseCourse()">
-                            🎓 Explore Courses
-                        </button>
-                        <button class="btn btn-secondary" onclick="restartQuiz()">
-                            🔄 Try Again
-                        </button>
-                    </div>
+    <button class="btn btn-primary" onclick="goToCourse1()">
+        Buy OSY+SEN
+    </button>
+    <button class="btn btn-primary" onclick="goToCourse2()">
+        Buy OSY+SEN+ACN
+    </button>
+</div>
+
                 </div>
             </div>
         </div>
@@ -985,106 +1008,116 @@
 
     <script>
         const questions = [
-            {
-                question: "What is the primary purpose of Object-Oriented Programming?",
-                options: [
-                    "To write faster executing code",
-                    "To organize code into reusable, modular components",
-                    "To use less computer memory",
-                    "To make code run in parallel processes"
-                ],
-                correct: 1,
-                explanation: "OOP focuses on organizing code into objects that contain both data and methods, promoting reusability and modularity."
-            },
-            {
-                question: "Which data structure follows the LIFO (Last In, First Out) principle?",
-                options: ["Queue", "Stack", "Array", "Linked List"],
-                correct: 1,
-                explanation: "A stack allows elements to be added and removed only from the top, following LIFO principle."
-            },
-            {
-                question: "What does 'Big O' notation primarily measure in algorithm analysis?",
-                options: [
-                    "Memory usage only",
-                    "Execution time only", 
-                    "Time and space complexity as input size grows",
-                    "Code readability and maintainability"
-                ],
-                correct: 2,
-                explanation: "Big O notation describes how algorithm performance scales with input size for both time and space."
-            },
-            {
-                question: "In database design, what is the main goal of normalization?",
-                options: [
-                    "Adding more data to existing tables",
-                    "Organizing data to reduce redundancy and improve integrity",
-                    "Creating automatic backup copies",
-                    "Encrypting all sensitive information"
-                ],
-                correct: 1,
-                explanation: "Normalization eliminates data redundancy and ensures data integrity through proper table organization."
-            },
-            {
-                question: "What is the primary advantage of version control systems like Git?",
-                options: [
-                    "Faster code execution speed",
-                    "Automatic bug detection and fixing",
-                    "Track changes and enable team collaboration",
-                    "Reduce file sizes automatically"
-                ],
-                correct: 2,
-                explanation: "Version control systems track code changes over time and facilitate collaboration among developers."
-            },
-            {
-                question: "Which HTTP status code indicates 'Resource Not Found'?",
-                options: ["200 (OK)", "301 (Moved Permanently)", "404 (Not Found)", "500 (Internal Server Error)"],
-                correct: 2,
-                explanation: "HTTP 404 status code specifically indicates that the requested resource could not be found on the server."
-            },
-            {
-                question: "What is the primary purpose of unit testing in software development?",
-                options: [
-                    "Test individual components or functions in isolation",
-                    "Test the complete application workflow",
-                    "Test only the user interface elements",
-                    "Test database connection performance"
-                ],
-                correct: 0,
-                explanation: "Unit tests verify that individual components work correctly in isolation from the rest of the system."
-            },
-            {
-                question: "In Agile methodology, what is a 'sprint'?",
-                options: [
-                    "A critical bug in production code",
-                    "A type of database optimization query",
-                    "A time-boxed iteration of development work",
-                    "A performance testing framework"
-                ],
-                correct: 2,
-                explanation: "A sprint is a fixed time period (usually 1-4 weeks) where a development team completes specific work."
-            },
-            {
-                question: "What does API stand for in software development?",
-                options: [
-                    "Advanced Programming Interface",
-                    "Application Programming Interface",
-                    "Automated Program Integration",
-                    "Applied Programming Instructions"
-                ],
-                correct: 1,
-                explanation: "API (Application Programming Interface) defines how software components communicate with each other."
-            },
-            {
-                question: "Which principle is NOT part of the SOLID design principles?",
-                options: [
-                    "Single Responsibility Principle",
-                    "Open/Closed Principle",
-                    "Dynamic Loading Principle",
-                    "Interface Segregation Principle"
-                ],
-                correct: 2,
-                explanation: "SOLID principles are: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion."
-            }
+    {
+        question: "Which header file is required for string handling functions like strlen()?",
+        options: [
+            "stdio.h",
+            "conio.h",
+            "string.h",
+            "stdlib.h"
+        ],
+        correct: 2,
+        explanation: "String handling functions like strlen(), strcpy(), strcat(), etc. are declared in string.h header file."
+    },
+    {
+        question: "Which of the following supports function overloading in C++?",
+        options: [
+            "Same function name with different return type only",
+            "Same function name with different parameter list",
+            "Same function name with different scope resolution",
+            "Same function name inside multiple header files"
+        ],
+        correct: 1,
+        explanation: "In C++, function overloading is supported only when functions have the same name but different parameter lists."
+    },
+    {
+        question: "Which concept allows the same function name to have different forms in C++?",
+        options: [
+            "Polymorphism",
+            "Inheritance",
+            "Encapsulation",
+            "Abstraction"
+        ],
+        correct: 0,
+        explanation: "Polymorphism in C++ allows the same function name to be used in multiple forms such as function overloading and overriding."
+    },
+    {
+        question: "In SQL, which command is used to remove a table completely along with its structure?",
+        options: [
+            "DELETE",
+            "REMOVE",
+            "DROP",
+            "TRUNCATE"
+        ],
+        correct: 2,
+        explanation: "The DROP command removes a table completely from the database including its structure and data."
+    },
+    {
+        question: "Which of the following ensures uniqueness of a column in DBMS?",
+        options: [
+            "Primary Key",
+            "Foreign Key",
+            "Index",
+            "View"
+        ],
+        correct: 0,
+        explanation: "A Primary Key ensures uniqueness in a column and prevents duplicate values."
+    },
+    {
+        question: "Which keyword in Java is used to inherit a class?",
+        options: [
+            "this",
+            "super",
+            "extends",
+            "implements"
+        ],
+        correct: 2,
+        explanation: "The 'extends' keyword is used in Java to inherit a class."
+    },
+    {
+        question: "Which exception is thrown when dividing a number by zero in Java?",
+        options: [
+            "IOException",
+            "NumberFormatException",
+            "ArithmeticException",
+            "NullPointerException"
+        ],
+        correct: 2,
+        explanation: "Dividing by zero in Java throws ArithmeticException."
+    },
+    {
+        question: "Which of the following data types in Python is immutable?",
+        options: [
+            "List",
+            "Set",
+            "Dictionary",
+            "Tuple"
+        ],
+        correct: 3,
+        explanation: "Tuple in Python is immutable, meaning its elements cannot be changed after creation."
+    },
+    {
+        question: "What is the correct way to handle exceptions in Python?",
+        options: [
+            "try-catch",
+            "do-except",
+            "try-except",
+            "handle-exception"
+        ],
+        correct: 2,
+        explanation: "In Python, exceptions are handled using the try-except block."
+    },
+    {
+        question: "Which sorting algorithm has the best average-case complexity?",
+        options: [
+            "Bubble Sort",
+            "Quick Sort",
+            "Insertion Sort",
+            "Selection Sort"
+        ],
+        correct: 1,
+        explanation: "Quick Sort has the best average-case time complexity of O(n log n)."
+    }
         ];
         
         let currentQuestion = 0;
@@ -1112,9 +1145,9 @@
         const scoreDisplay = document.getElementById('scoreDisplay');
         const finalScore = document.getElementById('finalScore');
         const resultContent = document.getElementById('resultContent');
-        const accuracyPercent = document.getElementById('accuracyPercent');
-        const timeUsed = document.getElementById('timeUsed');
-        const questionsAnsweredStat = document.getElementById('questionsAnswered');
+        //const accuracyPercent = document.getElementById('accuracyPercent');
+        //const timeUsed = document.getElementById('timeUsed');
+        //const questionsAnsweredStat = document.getElementById('questionsAnswered');
         
         // Initialize quiz
         startQuizBtn.addEventListener('click', startQuiz);
@@ -1254,30 +1287,30 @@
             
             // Update statistics
             finalScore.textContent = score;
-            accuracyPercent.textContent = accuracy + '%';
-            timeUsed.textContent = formatTime(timeTaken);
-            questionsAnsweredStat.textContent = questionsAnswered;
+            //accuracyPercent.textContent = accuracy + '%';
+            //timeUsed.textContent = formatTime(timeTaken);
+            //questionsAnsweredStat.textContent = questionsAnswered;
             
             // Determine score category and styling
             let scoreClass, resultTitle, resultDesc, couponCode, couponDiscount;
             
-            if (score >= 8) {
+            if (score >= 7) {
                 scoreClass = 'score-high';
                 resultTitle = '🎉 Exceptional Performance!';
                 resultDesc = `Outstanding! You scored ${score} out of 10. Campusify will make sure you stay ahead of everyone.`;
-                couponCode = 'CAMPUS10OFF';
+                couponCode = 'CAMPUSIFY-CHAMP';
                 couponDiscount = '10% OFF';
             } else if (score >= 5) {
                 scoreClass = 'score-medium';
                 resultTitle = '👍 Good Job!';
                 resultDesc = `Well done! You scored ${score} out of 10. but don’t stop here, we’ll help you reach your full potential..`;
-                couponCode = 'CAMPUS7OFF';
+                couponCode = 'CAMPUSIFY-PRO';
                 couponDiscount = '7% OFF';
             } else {
                 scoreClass = 'score-low';
                 resultTitle = '💪 Keep Learning!';
                 resultDesc = `You scored ${score} out of 10. Don't worry, we believe in your potential! <br>Competition is tough, but Campusify doesn't want you to lose out. Here's a special discount just for you!`;
-                couponCode = 'CAMPUS5OFF';
+                couponCode = 'CAMP-STEPUP';
                 couponDiscount = '5% OFF';
             }
             
@@ -1307,30 +1340,14 @@
             return `${mins}:${secs.toString().padStart(2, '0')}`;
         }
         
-        function purchaseCourse() {
-            alert('🎓 Redirecting to Campusify+ course catalog...\n\nDon\'t forget to use your discount code at checkout!');
-        }
-        
-        function restartQuiz() {
-            // Reset all variables
-            currentQuestion = 0;
-            score = 0;
-            timeLeft = 180;
-            userAnswers = [];
-            questionsAnswered = 0;
-            
-            // Clear timer
-            if (timer) {
-                clearInterval(timer);
-            }
-            
-            // Reset UI elements
-            timerElement.classList.remove('timer-warning');
-            scoreDisplay.classList.remove('score-high', 'score-medium', 'score-low');
-            
-            // Show welcome page
-            showPage('welcomePage');
-        }
+        function goToCourse1() {
+    window.open("https://tagmango.app/e8cb614b61", "_blank");
+}
+
+function goToCourse2() {
+    window.open("https://tagmango.app/500cf7aee2", "_blank");
+}
+
         
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
